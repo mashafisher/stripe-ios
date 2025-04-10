@@ -1,13 +1,24 @@
 workflows:
   ios-build:
-    name: iOS Build
+    name: Build Stripe PaymentSheet Example
     environment:
       xcode: latest
+      cocoapods: default
+      ruby: default
     scripts:
+      - name: Install Ruby Gems
+        script: |
+          cd "Example/PaymentSheet Example"
+          bundle install
+      - name: Install CocoaPods
+        script: |
+          cd "Example/PaymentSheet Example"
+          bundle exec pod install
       - name: Build app
         script: |
+          cd "Example/PaymentSheet Example"
           xcodebuild \
-            -project "Example/PaymentSheet Example/PaymentSheet Example.xcodeproj" \
+            -workspace "PaymentSheet Example.xcworkspace" \
             -scheme "PaymentSheet Example" \
             -sdk iphonesimulator \
             -destination 'platform=iOS Simulator,name=iPhone 14,OS=latest' \
