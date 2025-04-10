@@ -4,20 +4,12 @@ workflows:
     environment:
       xcode: latest
     scripts:
-      - name: Install dependencies
-        script: |
-          gem install cocoapods
-          pod install || true
       - name: Build app
         script: |
-          xcodebuild -workspace ExampleApp.xcworkspace \
-                     -scheme ExampleApp \
-                     -sdk iphonesimulator \
-                     -destination 'platform=iOS Simulator,name=iPhone 14' \
-                     clean build
-    artifacts:
-      - build/ios/ipa/*.ipa
-    publishing:
-      email:
-        recipients:
-          - your@email.com
+          xcodebuild \
+            -project "Example/PaymentSheet Example/PaymentSheet Example.xcodeproj" \
+            -scheme "PaymentSheet Example" \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 14,OS=latest' \
+            clean build
+
